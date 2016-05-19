@@ -5,7 +5,7 @@
 package sql_test
 
 import (
-	"database/sql"
+	"github.com/yydzero/database/sql"
 	"fmt"
 	"log"
 )

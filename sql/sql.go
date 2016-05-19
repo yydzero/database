@@ -13,7 +13,7 @@
 package sql
 
 import (
-	"database/sql/driver"
+	"github.com/yydzero/database/sql/driver"
 	"errors"
 	"fmt"
 	"io"
