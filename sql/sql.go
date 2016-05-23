@@ -1784,6 +1784,10 @@ func (rs *Rows) Columns() ([]string, error) {
 	return rs.rowsi.Columns(), nil
 }
 
+func (rs *Rows) GetDriverRows() (driver.Rows) {
+	return rs.rowsi
+}
+
 // Scan copies the columns in the current row into the values pointed
 // at by dest. The number of values in dest must be the same as the
 // number of columns in Rows.
