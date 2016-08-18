@@ -22,8 +22,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-	"log"
-	"reflect"
 )
 
 var (
