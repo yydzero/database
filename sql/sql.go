@@ -22,6 +22,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+	"log"
+	"reflect"
 )
 
 var (
@@ -950,6 +952,21 @@ func (db *DB) putConnDBLocked(dc *driverConn, err error) bool {
 // driver.ErrBadConn to signal a broken connection before forcing a new
 // connection to be opened.
 const maxBadConnRetries = 2
+
+// MyPrepare will export some internal information for hack
+func (db *DB) MyPrepare(query string) (interface{}, error) {
+	dc, err := db.conn(cachedOrNewConn)
+	if err != nil {
+		return nil, err
+	}
+
+	si, err := dc.ci.Prepare(query)
+
+	// Tell server we don't use this statement any more.
+	defer si.Close()
+
+	return si, err
+}
 
 // Prepare creates a prepared statement for later queries or executions.
 // Multiple queries or executions may be run concurrently from the
