@@ -958,6 +958,10 @@ func (db *DB) MyPrepare(query string) (interface{}, error) {
 		return nil, err
 	}
 
+	defer func() {
+		db.putConn(dc, err)
+	}()
+	
 	si, err := dc.ci.Prepare(query)
 
 	// Tell server we don't use this statement any more.
